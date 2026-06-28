@@ -25,7 +25,7 @@ router.get('/my-orders', protect, authorise('shop'), getMyOrders);
 // ── Staff / Admin: all orders (with ?status filter) ───────
 router.get('/', protect, authorise('admin', 'staff'), getAllOrders);
 
-// ── Staff: approve / reject a pending order ───────────────
+// ── Staff / Admin: approve / reject a pending order ───────
 router.patch('/:id/review',
   protect, authorise('admin', 'staff'),
   [body('action').isIn(['approve', 'reject']).withMessage('Action must be approve or reject')],
@@ -33,9 +33,11 @@ router.patch('/:id/review',
   reviewOrder
 );
 
-// ── Admin: dispatch approved order to a driver ────────────
+// ── Admin / Staff: dispatch approved order to a driver ────
+// CHANGED: 'staff' added so staff can dispatch directly after approving,
+// without waiting for an admin to do it separately.
 router.patch('/:id/dispatch',
-  protect, authorise('admin'),
+  protect, authorise('admin', 'staff'),
   [body('driverId').notEmpty().withMessage('driverId is required')],
   validate,
   dispatchOrder

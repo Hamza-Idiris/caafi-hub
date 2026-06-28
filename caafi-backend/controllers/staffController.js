@@ -1,6 +1,7 @@
-// controllers/staffController.js — Staff CRM and order auditing
+// controllers/staffController.js — Staff CRM, order auditing, and dispatch support
 const Shop  = require('../models/Shop');
 const Order = require('../models/Order');
+const User  = require('../models/User');
 const { success, error } = require('../utils/apiResponse');
 
 // ─────────────────────────────────────────────────────────
@@ -76,4 +77,17 @@ const getSummary = async (_req, res) => {
   });
 };
 
-module.exports = { getShops, getShopById, updateShop, getSummary };
+// ─────────────────────────────────────────────────────────
+// NEW — GET /api/staff/drivers — List active drivers
+// Needed so staff can pick a driver when dispatching an order,
+// without requiring admin-only access to /admin/users.
+// ─────────────────────────────────────────────────────────
+const getDrivers = async (_req, res) => {
+  const drivers = await User.find({ role: 'driver', isActive: true })
+    .select('name username plateNumber vehicle')
+    .sort({ name: 1 });
+
+  return success(res, 200, 'Drivers retrieved', drivers);
+};
+
+module.exports = { getShops, getShopById, updateShop, getSummary, getDrivers };
