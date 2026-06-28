@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: #09090B;
+    color: #CBD5E1;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: #0F172A; }
+  ::-webkit-scrollbar-thumb { background: #1E40AF; border-radius: 4px; }
+  h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
+}
+
+@layer components {
+  .glass {
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .glow-blue  { box-shadow: 0 0 24px rgba(14,165,233,0.2); }
+  .glow-orange{ box-shadow: 0 0 24px rgba(249,115,22,0.2); }
+  .card {
+    background: #0F172A;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+  }
+  .input-field {
+    width: 100%;
+    background: rgba(15,23,42,0.9);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #E2E8F0;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .input-field:focus { border-color: #0EA5E9; }
+  .input-field::placeholder { color: #374151; }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #0EA5E9;
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary:hover  { opacity: 0.9; }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .sidebar-link:hover { background: rgba(255,255,255,0.04); color: #94A3B8; }
+  .sidebar-link.active { background: rgba(14,165,233,0.12); color: #0EA5E9; }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #0EA5E9, #38BDF8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .bg-grid {
+    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* ── Light mode overrides ─────────────────────────────── */
+.light {
+  --bg-page:    #F1F5F9;
+  --bg-card:    #FFFFFF;
+  --bg-sidebar: #FFFFFF;
+  --border:     #E2E8F0;
+  --text-main:  #0F172A;
+  --text-muted: #64748B;
+}
+
+.light body {
+  background-color: #F1F5F9;
+  color: #0F172A;
+}
+
+.light .bg-dark   { background-color: #F1F5F9 !important; }
+.light .bg-secondary,
+.light aside      { background-color: #FFFFFF !important; border-color: #E2E8F0 !important; }
+.light .card      { background: #FFFFFF; border-color: #E2E8F0; }
+.light .glass     { background: rgba(255,255,255,0.9); border-color: #E2E8F0; }
+.light .input-field {
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+  color: #0F172A;
+}
+.light .input-field::placeholder { color: #94A3B8; }
+.light .text-slate-100 { color: #0F172A !important; }
+.light .text-slate-200 { color: #1E293B !important; }
+.light .text-slate-300 { color: #334155 !important; }
+.light .text-slate-400 { color: #475569 !important; }
+.light .text-slate-500 { color: #64748B !important; }
+.light .text-slate-600 { color: #94A3B8 !important; }
+.light .text-slate-700 { color: #94A3B8 !important; }
+.light .border-white\/5,
+.light .border-white\/6,
+.light .border-white\/8 { border-color: #E2E8F0 !important; }
+.light .bg-white\/2,
+.light .bg-white\/3,
+.light .bg-white\/5 { background-color: #F8FAFC !important; }
+.light .bg-white\/4 { background-color: #F1F5F9 !important; }
+.light .bg-black\/30 { background-color: #F1F5F9 !important; }
