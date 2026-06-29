@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext'
 import api from '../../api/axios'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import ThemeToggle from '../../components/ui/ThemeToggle'
 
 export default function DriverDashboard() {
   const { user, logout } = useAuth()
@@ -52,9 +53,14 @@ export default function DriverDashboard() {
         </div>
         <span className="font-heading font-extrabold text-slate-100">Caafi<span className="text-accent">-Hub</span></span>
         <span className="text-[10px] font-bold text-orange-400 bg-orange-400/10 border border-orange-400/20 px-2 py-0.5 rounded-full ml-1">Driver</span>
-        <button onClick={handleLogout} className="ml-auto flex items-center gap-1.5 text-red-400 text-xs font-semibold bg-red-500/8 border border-red-500/15 px-3 py-1.5 rounded-lg">
-          <LogOut size={13}/> Out
-        </button>
+
+        {/* NEW — Theme toggle + Logout grouped on the right */}
+        <div className="ml-auto flex items-center gap-2">
+          <ThemeToggle />
+          <button onClick={handleLogout} className="flex items-center gap-1.5 text-red-400 text-xs font-semibold bg-red-500/8 border border-red-500/15 px-3 py-1.5 rounded-lg">
+            <LogOut size={13}/> Out
+          </button>
+        </div>
       </header>
 
       <div className="max-w-md mx-auto p-4">
